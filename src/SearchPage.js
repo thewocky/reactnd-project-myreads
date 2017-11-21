@@ -31,6 +31,11 @@ class SearchPage extends React.Component {
   clearQuery = () => {
     this.setState({ query: '' })
   }
+
+  componentDidMount() {
+    const searchInput = document.getElementById( 'search-input' );
+    searchInput.focus();
+  }
 	
 	// render search page
   render() {
@@ -44,6 +49,7 @@ class SearchPage extends React.Component {
 	        <Link className='close-search' to='/'>Close</Link>
           <div className="search-books-input-wrapper">
             <input
+              id='search-input'
               type='text'
               placeholder='Search by title or author'
               value={query}
