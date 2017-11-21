@@ -47,10 +47,9 @@ class Book extends React.Component {
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${data.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
-              <select onChange={this.handleChangeShelf} defaultValue={data.shelf} value={this.state.value} >
+              <select onChange={this.handleChangeShelf} defaultValue={data.shelf || 'none'} value={this.state.value} >
                 <option value="none" disabled>Move to...</option>
                 { this.shelfOptions && this.shelfOptions.map(function(option) {
-                    // todo: preselect optino
                     return <option key={option.value} value={option.value}>{option.name}</option>
                   })
 
@@ -59,9 +58,11 @@ class Book extends React.Component {
             </div>
           </div>
           <div className="book-title">{ data.title }</div>
-          <div className="book-authors">{ data.authors.map( author => {
-            return author
-          }).join( '; ') }</div>
+          <div className="book-authors">{
+            data.authors && data.authors.map( author => {
+              return author
+            }).join( '; ')
+           }</div>
         </div>
       </li>
     )

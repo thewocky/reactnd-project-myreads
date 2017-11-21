@@ -20,16 +20,7 @@ class BooksApp extends Component {
       this.setState(state => ({
         books: state.books
       }))
-      /*
-      this.setState(state => ({
-        contacts: state.contacts.concat([ contact ])
-      }))
-      */
     })
-    // this.render();
-    // var partialState = this.state;
-    // partialState.data.shelf = event.target.value;
-    // this.setState(partialState);
   }
 
   componentDidMount() {
@@ -56,17 +47,6 @@ class BooksApp extends Component {
     const books = this.state.books;
     const updateBook = this.updateBook;
 
-    var shelfComponents = this.state.shelves.map(function(shelf) {
-      return <Bookshelf
-        books={books.filter(book => book.shelf === shelf)}
-        key={ shelf.replace(' ', '_') }
-        onChangeBookshelf={(book) => {
-          updateBook(book)
-        }}
-        shelfName={ shelf }
-      /> 
-    });
-
     return (
       <div className="app">
         <Route exact path='/' render={() => (
@@ -75,7 +55,18 @@ class BooksApp extends Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-                { shelfComponents }
+                {
+                  this.state.shelves.map(function(shelf) {
+                    return <Bookshelf
+                      books={books.filter(book => book.shelf === shelf)}
+                      key={ shelf.replace(' ', '_') }
+                      onChangeBookshelf={(book) => {
+                        updateBook(book)
+                      }}
+                      shelfName={ shelf }
+                    /> 
+                  })
+                }
             </div>
             <div className="open-search">
               <Link to='/search'>Add a book</Link>
@@ -83,7 +74,13 @@ class BooksApp extends Component {
           </div>
         )}/>
         <Route path='/search' render={() => (
-          <SearchPage />
+          <SearchPage
+            books={books}
+            onChangeBookshelf={(book) => {
+              updateBook(book)
+
+            }}
+          />
         )}/>
       </div>
     )
