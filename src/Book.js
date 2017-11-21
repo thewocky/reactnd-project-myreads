@@ -24,7 +24,7 @@ class Book extends React.Component {
   ];
 
   handleChangeShelf( event ) {
-    var partialState = this.state;
+    const partialState = this.state;
     partialState.data.shelf = event.target.value;
     this.setState(partialState);
     this.props.onChangeBook( this.state.data );

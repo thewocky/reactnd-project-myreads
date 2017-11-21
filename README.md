@@ -9,8 +9,7 @@ To run the project:
 
 
 ## Problems/questions
-- On return from Search page, newly added books aren't in correct shelves--only on refresh
-- Entering a space in search reduces results to 0. i.e. 'linux' returns 20 results but 'linux ' returns nothing
+- Entering a space in search reduces results to 0. i.e. 'linux' returns 20 results but 'linux ' returns nothing (known issue)
 
 ## To do (if this were a real app)
 - Add animation when removing books

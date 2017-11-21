@@ -13,10 +13,21 @@ class BooksApp extends Component {
   }
 
   updateBook( book ) {
-    BooksAPI.update(book, book.shelf).then(books => {
-      this.setState(state => ({
-        books: state.books
-      }))
+    BooksAPI.update(book, book.shelf).then(updatedShelves => {
+      const bookList = this.state.books;
+      const bookInList = bookList.findIndex( b => {
+        return b.id === book.id;
+      });
+      if( bookInList >= 0 ) {
+        bookList[bookInList] = book;
+      } else {
+        bookList.push( book );
+      }
+     
+      this.setState({
+        books: bookList
+      });
+
     })
   }
 
@@ -24,6 +35,7 @@ class BooksApp extends Component {
     this.updateBook = this.updateBook.bind(this);
     BooksAPI.getAll().then((books) => {
       this.setState({ books });
+      console.log( books );
       books.forEach( (b) => {
         const shelfExists = this.state.shelves.includes( b.shelf );
         if( !shelfExists ) {
