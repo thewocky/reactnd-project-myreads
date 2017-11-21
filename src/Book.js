@@ -8,11 +8,11 @@ class Book extends React.Component {
     this.state = {
       data: props.data
     }
-
     this.handleChangeShelf = this.handleChangeShelf.bind(this);
   }
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    onChangeBook: PropTypes.func.isRequired
   }
   
   // get this from books API?
@@ -30,12 +30,16 @@ class Book extends React.Component {
     var partialState = this.state;
     partialState.data.shelf = event.target.value;
     this.setState(partialState);
+    // console.log( 'handleChangeShelf' );
+    // console.log( this.state.data );
+    this.props.onChangeBook( this.state.data );
+    // this.props.onCreateContact(values)
     // TODO: cast event to app
   }
 
   render() {
 
-    const { data } = this.props;
+    const { data, onChangeBook } = this.props
 
     return (
       <li>
@@ -43,7 +47,7 @@ class Book extends React.Component {
           <div className="book-top">
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${data.imageLinks.smallThumbnail})` }}></div>
             <div className="book-shelf-changer">
-              <select onChange={this.handleChangeShelf} value={this.state.value} >
+              <select onChange={this.handleChangeShelf} defaultValue={data.shelf} value={this.state.value} >
                 <option value="none" disabled>Move to...</option>
                 { this.shelfOptions && this.shelfOptions.map(function(option) {
                     // todo: preselect optino
@@ -57,7 +61,7 @@ class Book extends React.Component {
           <div className="book-title">{ data.title }</div>
           <div className="book-authors">{ data.authors.map( author => {
             return author
-          }) }</div>
+          }).join( '; ') }</div>
         </div>
       </li>
     )

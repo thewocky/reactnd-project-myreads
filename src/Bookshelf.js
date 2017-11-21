@@ -5,11 +5,11 @@ import Book from './Book'
 
 class Bookshelf extends React.Component {
   static propTypes = {
-    onChangeBook: PropTypes.func.isRequired
+    onChangeBookshelf: PropTypes.func.isRequired
   }
 
   render() {
-    const { books, onChangeBook } = this.props
+    const { books, onChangeBookshelf } = this.props
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{ this.props.shelfName }</h2>
@@ -20,7 +20,9 @@ class Bookshelf extends React.Component {
               return <Book
                 data={ book }
                 key={ book.id }
-                changeBook={ onChangeBook }
+                onChangeBook={(book) => {
+                  onChangeBookshelf(book)
+                }}
               /> 
             })}
 
