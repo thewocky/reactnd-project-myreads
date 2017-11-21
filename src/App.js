@@ -5,12 +5,6 @@ import Bookshelf from './Bookshelf'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
 
-/*
- * Problems/questions
- * - on return from Search page, newly added books aren't in correct shelves--only on refresh
- */
-
-
 class BooksApp extends Component {
 
   state = {

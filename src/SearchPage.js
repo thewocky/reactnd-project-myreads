@@ -4,11 +4,6 @@ import PropTypes from 'prop-types'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
 
-/*
- * Problems/questions
- * - why does space in query return 0 results? i.e. 'linux '
- */
-
 class SearchPage extends React.Component {
 
   static propTypes = {
