@@ -5,6 +5,12 @@ import Bookshelf from './Bookshelf'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
 
+/*
+ * Problems/questions
+ * - on return from Search page, newly added books aren't in correct shelves--only on refresh
+ */
+
+
 class BooksApp extends Component {
 
   state = {
@@ -13,9 +19,6 @@ class BooksApp extends Component {
   }
 
   updateBook( book ) {
-    console.log('App: changeBook');
-    console.log( book.shelf );
-    // console.log(this.state);
     BooksAPI.update(book, book.shelf).then(books => {
       this.setState(state => ({
         books: state.books
@@ -26,9 +29,7 @@ class BooksApp extends Component {
   componentDidMount() {
     this.updateBook = this.updateBook.bind(this);
     BooksAPI.getAll().then((books) => {
-      // load up the shelves
       this.setState({ books });
-      // console.log( books );
       books.forEach( (b) => {
         const shelfExists = this.state.shelves.includes( b.shelf );
         if( !shelfExists ) {
@@ -78,7 +79,6 @@ class BooksApp extends Component {
             books={books}
             onChangeBookshelf={(book) => {
               updateBook(book)
-
             }}
           />
         )}/>

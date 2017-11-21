@@ -1,10 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import escapeRegExp from 'escape-string-regexp'
-import serializeForm from 'form-serialize'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
+
+/*
+ * Problems/questions
+ * - why does space in query return 0 results? i.e. 'linux '
+ */
 
 class SearchPage extends React.Component {
 
@@ -18,30 +21,20 @@ class SearchPage extends React.Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim() })
-    console.log( query );
+    this.setState({ query })
     if( !query.length ) {
-      console.log( 'delete search!' );
       this.setState( state => ({
         books: []
       }))
-      // this.setState( (state) => ( books: [] ) )
     } else {
       BooksAPI.search(query).then(books => {
         this.setState( (state) => ({ books }) )
-        console.log( 'query return: books' );
-        console.log( books );
-        console.log( 'query return: this.state' );
-        console.log( this.state );
       });
     }
   }
 
   clearQuery = () => {
     this.setState({ query: '' })
-  }
-
-  componentDidMount() {
   }
 	
 	// render search page

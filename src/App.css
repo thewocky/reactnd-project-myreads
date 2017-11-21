@@ -114,9 +114,23 @@ body, .app {
   justify-content: center;
   flex-wrap: wrap;
 }
+@keyframes reveal-book {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  50% {
+    opacity: 0;
+    width: 170px;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .books-grid li {
   padding: 10px 15px;
   text-align: left;
+  animation: reveal-book .5s;
 }
 
 .book {

@@ -23,29 +23,22 @@ class Book extends React.Component {
     { name: 'None', value: 'none' }
   ];
 
-  componentDidMount() {
-  }
-
   handleChangeShelf( event ) {
     var partialState = this.state;
     partialState.data.shelf = event.target.value;
     this.setState(partialState);
-    // console.log( 'handleChangeShelf' );
-    // console.log( this.state.data );
     this.props.onChangeBook( this.state.data );
-    // this.props.onCreateContact(values)
-    // TODO: cast event to app
   }
 
   render() {
 
-    const { data, onChangeBook } = this.props
+    const { data } = this.props
 
     return (
       <li>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${data.imageLinks.smallThumbnail})` }}></div>
+            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${data.imageLinks ? data.imageLinks.smallThumbnail : '' })` }}></div>
             <div className="book-shelf-changer">
               <select onChange={this.handleChangeShelf} defaultValue={data.shelf || 'none'} value={this.state.value} >
                 <option value="none" disabled>Move to...</option>
