@@ -32,7 +32,7 @@ class Book extends React.Component {
 
   render() {
 
-    const { data } = this.props
+    const { data } = this.props;
 
     return (
       <li>
