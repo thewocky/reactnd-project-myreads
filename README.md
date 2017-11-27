@@ -1,6 +1,6 @@
 # MyReads Project
 
-My submission for the MyReads project for Udacity's React Fundamentals course.
+Jeff Battema’s submission for the MyReads project for Udacity's React Fundamentals course.
 
 To run the project:
 
